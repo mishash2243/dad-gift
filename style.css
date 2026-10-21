@@ -1,7 +1,5 @@
 * { 
-  margin: 0; 
-  padding: 0; 
-  box-sizing: border-box; 
+  margin: 0; padding: 0; box-sizing: border-box; 
 }
 
 body {
@@ -10,71 +8,128 @@ body {
   color: #fff; 
   min-height: 100vh;
   display: flex; 
-  flex-direction: column;
   align-items: center; 
   justify-content: center;
   padding: 20px; 
   text-align: center;
-  overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
+  overflow-x: hidden;
+  position: relative;
 }
 
-h1 { 
-  font-size: clamp(1.5em, 6vw, 3.5em); /* Шрифт подстраивается под экран */
-  margin-bottom: 10px;
-  text-shadow: 0 4px 20px rgba(0,0,0,.4); 
-  line-height: 1.2;
+/* Главный блок */
+#main-content {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.5s ease;
 }
 
-.subtitle { 
-  font-size: clamp(0.9em, 3vw, 1.3em); 
-  opacity: 0.9;
-  margin-bottom: 20px; 
-  max-width: 90%; /* На телефоне текст не будет прилипать к краям */
-  line-height: 1.5; 
-}
-
+h1 { font-size: clamp(1.8em, 6vw, 3.5em); margin-bottom: 10px; text-shadow: 0 4px 20px rgba(0,0,0,.4); }
+.subtitle { font-size: clamp(1em, 3vw, 1.3em); opacity: 0.9; margin-bottom: 20px; }
 .slideshow {
-  position: relative; 
-  width: 100%; 
-  max-width: 700px; /* На компе не больше 700px, на телефоне — во всю ширину */
-  aspect-ratio: 4/3; /* Формат кадра 4:3 */
-  border-radius: 15px; 
-  overflow: hidden; 
-  background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,.5);
-  margin-bottom: 20px;
+  position: relative; width: 100%; max-width: 700px; aspect-ratio: 4/3;
+  border-radius: 15px; overflow: hidden; background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5); margin-bottom: 20px;
 }
-
 .slideshow img {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 100%;
-  object-fit: cover; /* Фото заполняет кадр, не сплющиваясь */
-  opacity: 0; 
-  transition: opacity 1s ease-in-out;
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0; transition: opacity 1s ease-in-out;
+}
+.slideshow img.active { opacity: 1; }
+.caption { font-size: clamp(0.9em, 3vw, 1.1em); opacity: 0.85; margin-bottom: 10px; }
+.heart { font-size: 2em; animation: beat 1.2s infinite; display: inline-block; margin-bottom: 20px; }
+@keyframes beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+/* Кнопка-открытка */
+#envelope-container {
+  margin-top: 20px;
+  animation: floatUp 2s ease-out forwards;
+  opacity: 0;
+  transform: translateY(50px);
 }
 
-.slideshow img.active { 
-  opacity: 1; 
+#envelope {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  padding: 15px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.2s, background 0.2s;
+  backdrop-filter: blur(5px);
+}
+#envelope:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+}
+.envelope-emoji { font-size: 1.5em; }
+.envelope-text { font-weight: bold; font-size: 1.1em; }
+
+@keyframes floatUp {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.caption { 
-  font-size: clamp(0.9em, 3vw, 1.1em); 
-  opacity: 0.85;
-  max-width: 90%; 
-  line-height: 1.6; 
-  margin-bottom: 15px;
+/* Блок открытки (скрыт изначально) */
+#card-content {
+  display: none;
+  width: 100%;
+  max-width: 1100px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  animation: fadeIn 0.8s ease;
 }
 
-.heart { 
-  font-size: 2em; 
-  animation: beat 1.2s infinite; 
-  display: inline-block; 
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.side-text {
+  width: 25%;
+  font-size: 1.2em;
+  line-height: 1.6;
+  opacity: 0;
+  animation: slideIn 1s ease forwards;
+  animation-delay: 0.5s;
+  text-shadow: 0 2px 10px rgba(0,0,0,.5);
 }
 
-@keyframes beat { 
-  0%, 100% { transform: scale(1); } 
-  50% { transform: scale(1.2); } 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.left { text-align: right; }
+.right { text-align: left; }
+
+.card-center {
+  width: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 35px rgba(0,0,0,.3);
+}
+.card-center h2 { font-size: 2.5em; margin-bottom: 10px; }
+
+.close-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: all 0.3s;
+}
+.close-btn:hover { background: #fff; color: #1e3c72; }
+
+/* Адаптация под телефон (текст по бокам встанет сверху и снизу) */
+@media (max-width: 768px) {
+  #card-content { flex-direction: column; }
+  .side-text { width: 100%; text-align: center; margin: 10px 0; }
+  .card-center { width: 100%; order: -1; margin-bottom: 20px; }
 }
