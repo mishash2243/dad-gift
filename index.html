@@ -5,22 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>С Днём отца!</title>
 <link rel="stylesheet" href="style.css">
+<!-- Подключаем библиотеку для конфетти -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-  <h1>С Днём отца, папа! 💙</h1>
-  <p class="subtitle">Спасибо за всё. Даже на расстоянии я всегда с тобой.</p>
 
-  <div class="slideshow" id="slideshow">
-    <img src="photos/1.jpg" class="active" alt="">
-    <img src="photos/2.jpg" alt="">
-    <img src="photos/3.jpg" alt="">
-    <img src="photos/4.jpg" alt="">
-    <img src="photos/5.jpg" alt="">
-    <img src="photos/6.jpg" alt="">
+  <!-- ОСНОВНОЙ БЛОК (твой текущий дизайн) -->
+  <div id="main-content">
+    <h1>С Днём отца, папа! 💙</h1>
+    <p class="subtitle">Спасибо за всё. Даже на расстоянии я всегда с тобой.</p>
+
+    <div class="slideshow" id="slideshow">
+      <img src="photos/1.jpg" class="active" alt="">
+      <img src="photos/2.jpg" alt="">
+      <img src="photos/3.jpg" alt="">
+      <img src="photos/4.jpg" alt="">
+      <img src="photos/5.jpg" alt="">
+      <img src="photos/6.jpg" alt="">
+    </div>
+
+    <p class="caption">Каждое фото — момент, который я храню. Люблю тебя!</p>
+    <div class="heart">❤️</div>
+
+    <!-- Вылетающая кнопка-открытка -->
+    <div id="envelope-container">
+      <div id="envelope" onclick="openCard()">
+        <span class="envelope-emoji">💌</span>
+        <span class="envelope-text">Нажми, чтобы открыть</span>
+      </div>
+    </div>
   </div>
 
-  <p class="caption">Каждое фото — момент, который я храню. Люблю тебя!</p>
-  <div class="heart">❤️</div>
+  <!-- БЛОК С ОТКРЫТКОЙ (появится после клика) -->
+  <div id="card-content">
+    <div class="side-text left">
+      Дорогой папа!<br><br>
+      Спасибо за твою поддержку, мудрость и заботу.
+    </div>
+    
+    <div class="card-center">
+      <h2>С Праздником!</h2>
+      <div class="heart" style="font-size: 3em; margin-top: 20px;">❤️</div>
+      <button class="close-btn" onclick="closeCard()">Вернуться к фото</button>
+    </div>
+
+    <div class="side-text right">
+      Ты лучший отец на свете.<br><br>
+      Я тебя очень сильно люблю и скучаю!
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
