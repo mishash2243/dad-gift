@@ -1,28 +1,80 @@
-* { margin:0; padding:0; box-sizing:border-box; }
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   background: linear-gradient(135deg, #1e3c72, #2a5298);
-  color:#fff; min-height:100vh;
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  padding:20px; text-align:center;
+  color: #fff; 
+  min-height: 100vh;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  padding: 20px; 
+  text-align: center;
+  overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
 }
-h1 { font-size: clamp(1.8em, 6vw, 3.5em); margin-bottom:10px;
-     text-shadow:0 4px 20px rgba(0,0,0,.4); }
-.subtitle { font-size: clamp(1em, 3vw, 1.3em); opacity:.9;
-            margin-bottom:30px; max-width:700px; line-height:1.5; }
+
+h1 { 
+  font-size: clamp(1.5em, 6vw, 3.5em); /* Шрифт подстраивается под экран */
+  margin-bottom: 10px;
+  text-shadow: 0 4px 20px rgba(0,0,0,.4); 
+  line-height: 1.2;
+}
+
+.subtitle { 
+  font-size: clamp(0.9em, 3vw, 1.3em); 
+  opacity: 0.9;
+  margin-bottom: 20px; 
+  max-width: 90%; /* На телефоне текст не будет прилипать к краям */
+  line-height: 1.5; 
+}
+
 .slideshow {
-  position:relative; width:min(90vw,700px); aspect-ratio:4/3;
-  border-radius:20px; overflow:hidden; background:#000;
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  position: relative; 
+  width: 100%; 
+  max-width: 700px; /* На компе не больше 700px, на телефоне — во всю ширину */
+  aspect-ratio: 4/3; /* Формат кадра 4:3 */
+  border-radius: 15px; 
+  overflow: hidden; 
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+  margin-bottom: 20px;
 }
+
 .slideshow img {
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; opacity:0; transition:opacity 1.2s ease-in-out;
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; /* Фото заполняет кадр, не сплющиваясь */
+  opacity: 0; 
+  transition: opacity 1s ease-in-out;
 }
-.slideshow img.active { opacity:1; }
-.caption { margin-top:25px; font-size:1.1em; opacity:.85;
-           max-width:600px; line-height:1.6; }
-.heart { font-size:2em; margin-top:20px;
-         animation:beat 1.2s infinite; display:inline-block; }
-@keyframes beat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2);} }
+
+.slideshow img.active { 
+  opacity: 1; 
+}
+
+.caption { 
+  font-size: clamp(0.9em, 3vw, 1.1em); 
+  opacity: 0.85;
+  max-width: 90%; 
+  line-height: 1.6; 
+  margin-bottom: 15px;
+}
+
+.heart { 
+  font-size: 2em; 
+  animation: beat 1.2s infinite; 
+  display: inline-block; 
+}
+
+@keyframes beat { 
+  0%, 100% { transform: scale(1); } 
+  50% { transform: scale(1.2); } 
+}
